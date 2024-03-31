@@ -13,11 +13,7 @@ export class CalculateService {
   calculte(value: string, inputType: string) {
     if (inputType === 'num') {
       if (this.endCurrentCal) {
-        this.firstNum = '';
-        this.secondNum = '';
-        this.operator = '';
-        this.result = 0;
-        this.endCurrentCal = false;
+        this.resetCalculator();
       }
       this.firstNum += value;
       console.log('first number ' + this.firstNum);
@@ -34,6 +30,9 @@ export class CalculateService {
 
       } else if (inputType === 'delete') {
         this.deleteLastInput();
+
+      } else if (inputType === 'clear') {
+        this.resetCalculator();
 
       }
     }
@@ -96,5 +95,14 @@ export class CalculateService {
       this.firstNum.slice(0, this.firstNum.length - 1);
     console.log('first number ' + this.firstNum);
     console.log('result ' + this.result);
+  }
+
+  resetCalculator() {
+    this.firstNum = '';
+    this.secondNum = '';
+    this.operator = '';
+    this.result = 0;
+    this.endCurrentCal = false;
+    console.log('calculator reset');
   }
 }
