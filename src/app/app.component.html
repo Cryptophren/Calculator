@@ -39,16 +39,16 @@
     </section>
   </div>
 
-  <div class="theme-buttons-container">
-    <button [ngClass]="{'theme-btn': true, 'to-top': lightMode}" (click)="changeTheme('light')" matTooltip="Light mode"
+  <div class="mode-buttons-container">
+    <button [ngClass]="{'mode-btn': true, 'to-top': lightMode}" (click)="changeMode('light')" matTooltip="Light mode"
       matTooltipShowDelay="300" matTooltipPosition="right">
       <i class='bx bxs-sun'></i>
     </button>
-    <button [ngClass]="{'theme-btn': true, 'to-top': darkMode}" (click)="changeTheme('dark')" matTooltip="Dark mode"
+    <button [ngClass]="{'mode-btn': true, 'to-top': darkMode}" (click)="changeMode('dark')" matTooltip="Dark mode"
       matTooltipShowDelay="300" matTooltipPosition="right">
       <i class='bx bxs-moon'></i>
     </button>
-    <button [ngClass]="{'theme-btn': true, 'to-top': contrastMode}" (click)="changeTheme('contrast')"
+    <button [ngClass]="{'mode-btn': true, 'to-top': contrastMode}" (click)="changeMode('contrast')"
       matTooltip="Contrast mode" matTooltipShowDelay="300" matTooltipPosition="right">
       <i class='bx bxs-brightness-half'></i>
     </button>

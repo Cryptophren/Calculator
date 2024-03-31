@@ -18,8 +18,8 @@ export class AppComponent {
 
   themeService: ModeService = inject(ModeService);
 
-  changeTheme(mode: string) {
-    this.themeService.changeTheme(mode);
+  changeMode(mode: string) {
+    this.themeService.changeMode(mode);
 
     switch (mode) {
       case 'light':

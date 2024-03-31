@@ -91,7 +91,7 @@ button:active {
 }
 
 
-.theme-buttons-container {
+.mode-buttons-container {
   display: flex;
   flex-direction: column;
   width: 69px;
@@ -103,7 +103,7 @@ button:active {
   transition: all .3s;
 }
 
-.theme-btn {
+.mode-btn {
   position: absolute;
   top: 2px;
   left: 2px;
@@ -113,19 +113,19 @@ button:active {
   transition: all .3s;
 }
 
-.theme-buttons-container:hover {
+.mode-buttons-container:hover {
   height: 209px;
   background-color: var(--menu);
 }
 
-.theme-buttons-container:hover :nth-child(2) {
+.mode-buttons-container:hover :nth-child(2) {
   top: 72px;
 }
 
-.theme-buttons-container:hover :nth-child(3) {
+.mode-buttons-container:hover :nth-child(3) {
   top: 142px;
 }
 
-.theme-buttons-container button.to-top {
+.mode-buttons-container button.to-top {
   z-index: 1;
 }
