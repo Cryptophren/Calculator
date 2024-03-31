@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ModeService } from './services/mode.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CalculateService } from './services/calculate.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent {
   contrastMode: boolean = false;
 
   themeService: ModeService = inject(ModeService);
+  calculateService: CalculateService = inject(CalculateService);
 
   changeMode(mode: string) {
     this.themeService.changeMode(mode);
