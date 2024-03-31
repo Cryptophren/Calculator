@@ -7,26 +7,35 @@ export class CalculateService {
   firstNum: string = '';
   secondNum: string = '';
   operator: string = '';
+  result: number = 0;
+  endCurrentCal: boolean = false;
 
   calculte(value: string, inputType: string) {
 
     if (inputType === 'num') {
+      if (this.endCurrentCal) {
+        this.firstNum = '';
+        this.secondNum = '';
+        this.operator = '';
+        this.result = 0;
+        this.endCurrentCal = false;
+      }
       this.firstNum += value;
       // console.log('first number ' + this.firstNum);
       // console.log('second number ' + this.secondNum);
     } else {
-      if (this.firstNum === '') return
-
+      if (this.firstNum === '') return;
 
       if (inputType === 'oper') {
-        if (this.firstNum !== '' && this.secondNum !== '') {
-          let tempResult: string = this.calculateResult().toString();
+        if (this.secondNum !== '') {
+
+          this.secondNum = this.calculateResult().toString();
           this.firstNum = '';
-          this.secondNum = tempResult;
           this.operator = value;
-          // console.log('tempResult: ' + tempResult);
+          this.endCurrentCal = false;
           // console.log('first number ' + this.firstNum);
           // console.log('second number ' + this.secondNum);
+          // console.log('result ' + this.result);
           // console.log('operator ' + this.operator);
           return
         }
@@ -39,7 +48,7 @@ export class CalculateService {
         // console.log('second number ' + this.secondNum);
         // console.log('operator ' + this.operator);
       } else if (inputType === 'equal') {
-        if (this.secondNum === '') return
+        if (this.secondNum === '') return;
         this.calculateResult();
       }
     }
@@ -59,7 +68,15 @@ export class CalculateService {
     else {
       result = +this.secondNum / +this.firstNum;
     }
-    // console.log('result: ' + result);
+    this.result = result;
+    this.endCurrentCal = true;
+    // console.log('first number ' + this.firstNum);
+    // console.log('second number ' + this.secondNum);
+    // console.log('result ' + this.result);
     return result;
+  }
+
+  renderInputAndResult() {
+
   }
 }
