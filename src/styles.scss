@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+  /* light mode is default */
+  --background: #DCFDE3;
+  --calculator: #5AB598;
+  --menu: #b66666;
+  --syms: #B1424F;
+  --nums: #000000;
+  --hover: #BCE9C6;
+}
+
+/* dark mode */
+/* --background: #091525;
+--calculator: #2D3A45;
+--menu: #5B652C;
+--syms: #B9C6FF;
+--nums: #CBCBCB;
+--hover: #12223A; */
+
+
+/* contrast mode */
+/*  --background: #000000;
+  --calculator: #cccccc;
+  --menu: #001170;
+  --syms: #00ff22;
+  --nums: #FFF700;
+  --hover: #474747; */

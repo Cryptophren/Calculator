@@ -1,0 +1,131 @@
+main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 70px;
+  justify-content: center;
+  background-color: var(--background);
+  overflow: auto;
+}
+
+.calculator-container {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: fit-content;
+  margin-left: 40px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: var(--calculator);
+}
+
+.display-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  row-gap: 5px;
+}
+
+.display-container div {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  padding: 0 15px;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 15px;
+  font-size: 30px;
+  color: var(--nums);
+  background-color: var(--background);
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  row-gap: 10px;
+}
+
+.buttons-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button {
+  display: flex;
+  width: 65px;
+  height: 65px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  font-size: 30px;
+  background-color: var(--background);
+  cursor: pointer;
+  transition: all .15s;
+}
+
+button:hover {
+  background-color: var(--hover);
+}
+
+button:active {
+  font-size: 26px;
+}
+
+.num-btn {
+  color: var(--nums);
+}
+
+.sym-btn {
+  color: var(--syms);
+}
+
+.clear-btn {
+  color: rgb(180, 19, 19);
+}
+
+
+.theme-buttons-container {
+  display: flex;
+  flex-direction: column;
+  width: 69px;
+  height: 70px;
+  margin-top: 10px;
+  margin-left: 15px;
+  position: relative;
+  border-radius: 50px;
+  transition: all .3s;
+}
+
+.theme-btn {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 30px;
+  color: var(--nums);
+  background-color: var(--calculator);
+  transition: all .3s;
+}
+
+.theme-buttons-container:hover {
+  height: 209px;
+  background-color: var(--menu);
+}
+
+.theme-buttons-container:hover :nth-child(2) {
+  top: 72px;
+}
+
+.theme-buttons-container:hover :nth-child(3) {
+  top: 142px;
+}
+
+.theme-buttons-container button.to-top {
+  z-index: 1;
+}
