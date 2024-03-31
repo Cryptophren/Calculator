@@ -16,74 +16,68 @@ export class CalculateService {
         this.resetCalculator();
       }
       this.firstNum += value;
-      console.log('first number ' + this.firstNum);
-      console.log('second number ' + this.secondNum);
+
     } else {
       if (this.firstNum === '') return;
 
       if (inputType === 'oper') {
         this.calculateOperation(value);
 
-      } else if (inputType === 'equal') {
-        if (this.secondNum === '') return;
-        this.calculateResult();
+      } else if (inputType === 'percent') {
+        this.firstNum = (+this.firstNum / 100).toString();
 
       } else if (inputType === 'delete') {
-        this.deleteLastInput();
+        this.continueWithResult();
+        this.firstNum = this.firstNum.slice(0, this.firstNum.length - 1);
 
       } else if (inputType === 'clear') {
         this.resetCalculator();
 
+      } else if (inputType === 'convert') {
+        this.continueWithResult();
+        this.firstNum = (-+this.firstNum).toString();
+
+      } else if (inputType === 'equal') {
+        if (this.secondNum !== '')
+          this.calculateResult();
       }
     }
   }
 
   calculateOperation(value: string) {
     if (this.secondNum !== '') {
-
       this.secondNum = this.calculateResult().toString();
       this.firstNum = '';
       this.operator = value;
       this.endCurrentCal = false;
-      console.log('first number ' + this.firstNum);
-      console.log('second number ' + this.secondNum);
-      console.log('result ' + this.result);
-      console.log('operator ' + this.operator);
       return
     }
 
     this.secondNum = this.firstNum;
     this.firstNum = '';
     this.operator = value;
-
-    console.log('first number ' + this.firstNum);
-    console.log('second number ' + this.secondNum);
-    console.log('operator ' + this.operator);
   }
 
   calculateResult() {
     let result: number;
 
-    if (this.operator === '+') {
+    if (this.operator === '+')
       result = +this.firstNum + +this.secondNum;
-    } else if (this.operator === '-') {
+
+    else if (this.operator === '-')
       result = +this.secondNum - +this.firstNum;
-    }
-    else if (this.operator === '*') {
+
+    else if (this.operator === '*')
       result = +this.firstNum * +this.secondNum;
-    }
-    else {
-      result = +this.secondNum / +this.firstNum;
-    }
+
+    else result = +this.secondNum / +this.firstNum;
+
     this.result = result;
     this.endCurrentCal = true;
-    console.log('first number ' + this.firstNum);
-    console.log('second number ' + this.secondNum);
-    console.log('result ' + this.result);
     return result;
   }
 
-  deleteLastInput() {
+  continueWithResult() {
     if (this.endCurrentCal) {
       this.firstNum = this.result.toString();
       this.secondNum = '';
@@ -91,10 +85,6 @@ export class CalculateService {
       this.result = 0;
       this.endCurrentCal = false;
     }
-    this.firstNum =
-      this.firstNum.slice(0, this.firstNum.length - 1);
-    console.log('first number ' + this.firstNum);
-    console.log('result ' + this.result);
   }
 
   resetCalculator() {
@@ -103,6 +93,5 @@ export class CalculateService {
     this.operator = '';
     this.result = 0;
     this.endCurrentCal = false;
-    console.log('calculator reset');
   }
 }
