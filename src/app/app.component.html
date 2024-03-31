@@ -7,34 +7,34 @@
 
     <section class="buttons-container">
       <div class="buttons-row">
-        <button class="clear-btn">C</button>
-        <button class="sym-btn">&laquo;</button>
-        <button class="sym-btn">%</button>
-        <button class="sym-btn">/</button>
+        <button class="clear-btn" data-type="clear" data-type="clear" (click)="getInput($event)">C</button>
+        <button class="sym-btn" data-type="delete" (click)="getInput($event)">&laquo;</button>
+        <button class="sym-btn" data-type="percent" (click)="getInput($event)">%</button>
+        <button class="sym-btn" data-type="oper" (click)="getInput($event)">/</button>
       </div>
       <div class="buttons-row">
-        <button class="num-btn">7</button>
-        <button class="num-btn">8</button>
-        <button class="num-btn">9</button>
-        <button class="sym-btn">*</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">7</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">8</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">9</button>
+        <button class="sym-btn" data-type="oper" (click)="getInput($event)">*</button>
       </div>
       <div class="buttons-row">
-        <button class="num-btn">4</button>
-        <button class="num-btn">5</button>
-        <button class="num-btn">6</button>
-        <button class="sym-btn">-</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">4</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">5</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">6</button>
+        <button class="sym-btn" data-type="oper" (click)="getInput($event)">-</button>
       </div>
       <div class="buttons-row">
-        <button class="num-btn">1</button>
-        <button class="num-btn">2</button>
-        <button class="num-btn">3</button>
-        <button class="sym-btn">+</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">1</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">2</button>
+        <button class="num-btn" data-type="num" (click)="getInput($event)">3</button>
+        <button class="sym-btn" data-type="oper" (click)="getInput($event)">+</button>
       </div>
       <div class="buttons-row">
-        <button class="sym-btn">+/-</button>
-        <button class="num-btn">0</button>
-        <button class="sym-btn">.</button>
-        <button class="num-btn">=</button>
+        <button class="sym-btn" data-type="convert" (click)="getInput($event)">+/-</button>
+        <button class="num-btn" data-type="num" (click)="getInput( $event)">0</button>
+        <button class="sym-btn" data-type="dot" (click)="getInput($event)">.</button>
+        <button class="sym-btn" data-type="equal" (click)="getInput($event)">=</button>
       </div>
     </section>
   </div>

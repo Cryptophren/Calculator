@@ -40,4 +40,11 @@ export class AppComponent {
         this.contrastMode = true;
     }
   }
+
+  getInput(event: any) {
+    const inputType: string = event.target.dataset.type;
+    const value: string = event.target.innerHTML;
+
+    this.calculateService.calculte(value, inputType);
+  }
 }
