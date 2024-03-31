@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { ModeService } from './services/mode.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ModeService } from './services/mode.service';
 import { CalculateService } from './services/calculate.service';
 
 
@@ -12,33 +12,27 @@ import { CalculateService } from './services/calculate.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  lightMode: boolean = true; // this is the default mode
-  darkMode: boolean = false;
-  contrastMode: boolean = false;
+export class AppComponent implements OnInit {
+  currentMode: string = '';
 
-  themeService: ModeService = inject(ModeService);
+  modeService: ModeService = inject(ModeService);
   calculateService: CalculateService = inject(CalculateService);
 
-  changeMode(mode: string) {
-    this.themeService.changeMode(mode);
+  ngOnInit(): void {
+    this.currentMode =
+      JSON.parse(localStorage.getItem('currentMode') ?? '"light"');
 
-    switch (mode) {
-      case 'light':
-        this.lightMode = true;
-        this.darkMode = false;
-        this.contrastMode = false;
-        break;
-      case 'dark':
-        this.lightMode = false;
-        this.darkMode = true;
-        this.contrastMode = false;
-        break;
-      case 'contrast':
-        this.lightMode = false;
-        this.darkMode = false;
-        this.contrastMode = true;
-    }
+    this.setMode(this.currentMode);
+  }
+
+  setMode(mode: string) {
+    this.modeService.setMode(mode);
+
+    if (mode === 'light') this.currentMode = 'light';
+    if (mode === 'dark') this.currentMode = 'dark';
+    if (mode === 'contrast') this.currentMode = 'contrast';
+
+    localStorage.setItem('currentMode', JSON.stringify(mode));
   }
 
   getInput(event: any) {

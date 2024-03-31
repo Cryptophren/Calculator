@@ -9,7 +9,9 @@
     <section class="buttons-container">
       <div class="buttons-row">
         <button class="clear-btn" data-type="clear" data-type="clear" (click)="getInput($event)">C</button>
-        <button class="sym-btn" data-type="delete" (click)="getInput($event)">&laquo;</button>
+        <button class="sym-btn" data-type="delete" (click)="getInput($event)">
+          <i class='bx bx-arrow-back'></i>
+        </button>
         <button class="sym-btn" data-type="percent" (click)="getInput($event)">%</button>
         <button class="sym-btn" data-type="oper" (click)="getInput($event)">/</button>
       </div>
@@ -41,15 +43,15 @@
   </div>
 
   <div class="mode-buttons-container">
-    <button class="mode-btn" [ngClass]="{'to-top': lightMode}" (click)="changeMode('light')" matTooltip="Light mode"
-      matTooltipShowDelay="300" matTooltipPosition="right">
+    <button class="mode-btn" [ngClass]="{'to-top': currentMode === 'light'}" (click)="setMode('light')"
+      matTooltip="Light mode" matTooltipShowDelay="300" matTooltipPosition="right">
       <i class='bx bxs-sun'></i>
     </button>
-    <button class="mode-btn" [ngClass]="{'to-top': darkMode}" (click)="changeMode('dark')" matTooltip="Dark mode"
-      matTooltipShowDelay="300" matTooltipPosition="right">
+    <button class="mode-btn" [ngClass]="{'to-top': currentMode === 'dark'}" (click)="setMode('dark')"
+      matTooltip="Dark mode" matTooltipShowDelay="300" matTooltipPosition="right">
       <i class='bx bxs-moon'></i>
     </button>
-    <button class="mode-btn" [ngClass]="{'to-top': contrastMode}" (click)="changeMode('contrast')"
+    <button class="mode-btn" [ngClass]="{'to-top': currentMode === 'contrast'}" (click)="setMode('contrast')"
       matTooltip="Contrast mode" matTooltipShowDelay="300" matTooltipPosition="right">
       <i class='bx bxs-brightness-half'></i>
     </button>

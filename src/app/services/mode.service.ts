@@ -8,7 +8,7 @@ export class ModeService {
   root: HTMLElement | null = document.querySelector(':root');
   rs: CSSStyleDeclaration | undefined = this.root?.style;
 
-  changeMode(mode: string) {
+  setMode(mode: string) {
     if (this.rs)
       switch (mode) {
         case 'light':
