@@ -11,13 +11,18 @@ export class CalculateService {
   endCurrentCal: boolean = false;
 
   calculte(value: string, inputType: string) {
-    if (inputType === 'num') {
+    if (inputType === 'num' && this.firstNum.length < 15) {
+
+      if (value === "0" && this.firstNum === '0') return;
+
       if (this.endCurrentCal) {
         this.resetCalculator();
       }
       this.firstNum += value;
 
     } else {
+      if (this.firstNum === '' && value === ',') this.firstNum = '0.';
+
       if (this.firstNum === '') return;
 
       if (inputType === 'oper') {
@@ -65,16 +70,21 @@ export class CalculateService {
   calculateResult() {
     let result: number;
 
-    if (this.operator === '+')
+    if (this.operator === '/') {
+      if (this.firstNum === '0') {
+        alert('Division by zero is undefined!');
+        this.firstNum = '';
+        return '';
+      }
+      result = +this.secondNum / +this.firstNum;
+
+    } else if (this.operator === '+') {
       result = +this.firstNum + +this.secondNum;
 
-    else if (this.operator === '-')
+    } else if (this.operator === '-') {
       result = +this.secondNum - +this.firstNum;
 
-    else if (this.operator === '*')
-      result = +this.firstNum * +this.secondNum;
-
-    else result = +this.secondNum / +this.firstNum;
+    } else result = +this.firstNum * +this.secondNum;
 
     this.result = result;
     this.endCurrentCal = true;
