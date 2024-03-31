@@ -37,6 +37,10 @@ export class CalculateService {
         this.continueWithResult();
         this.firstNum = (-+this.firstNum).toString();
 
+      } else if (inputType === 'comma') {
+        const commaFound = this.firstNum.includes('.');
+        if (!commaFound) this.firstNum += '.';
+
       } else if (inputType === 'equal') {
         if (this.secondNum !== '')
           this.calculateResult();
