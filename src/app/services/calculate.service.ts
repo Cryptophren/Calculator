@@ -14,6 +14,7 @@ export class CalculateService {
   lowerDisplay: string = '';
   showErrMsg: boolean = false;
   errMsg: string = '';
+  timeoutId: any;
 
   calculate(value: string, inputType: string) {
     if (this.upperDisplay.length > 30) {
@@ -24,9 +25,9 @@ export class CalculateService {
     if (inputType === 'num') {
       if (this.calcFinished) this.resetCalculator();
 
-      if (this.firstNum === '0' && value === "0") return;
-
-      if (this.firstNum === '0' && value !== "0") {
+      if (this.firstNum === '0' && value === "0")
+        return;
+      else if (this.firstNum === '0' && value !== "0") {
         this.firstNum = value;
         this.upperDisplay = value;
         return
@@ -231,12 +232,15 @@ export class CalculateService {
   }
 
   showErrMag(msg: string) {
+    if (this.timeoutId)
+      clearTimeout(this.timeoutId);
+
     this.errMsg = msg;
     this.showErrMsg = true
 
-    const timeoutId = setTimeout(() => {
+    this.timeoutId = setTimeout(() => {
       this.showErrMsg = false;
-      clearTimeout(timeoutId);
+      clearTimeout(this.timeoutId);
     }, 2000)
   }
 
