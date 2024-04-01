@@ -68,7 +68,7 @@ button {
   font-size: 30px;
   background-color: var(--background);
   cursor: pointer;
-  transition: all .15s;
+  transition: background-color .3s;
 }
 
 button:hover {
@@ -93,6 +93,7 @@ button:active {
 
 .bx-arrow-back {
   pointer-events: none;
+  transition: none;
 }
 
 .mode-buttons-container {
