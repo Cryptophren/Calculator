@@ -12,9 +12,16 @@ export class CalculateService {
   calcFinished: boolean = false;
   upperDisplay: string = '';
   lowerDisplay: string = '';
+  showErrMsg: boolean = false;
+  errMsg: string = '';
 
   calculate(value: string, inputType: string) {
-    if (inputType === 'num' && this.firstNum.length < 15) {
+    if (this.upperDisplay.length > 30) {
+      this.showErrMag('30 Characters max!');
+      this.resetCalculator();
+    }
+
+    if (inputType === 'num') {
       if (this.calcFinished) this.resetCalculator();
 
       if (this.firstNum === '0' && value === "0") return;
@@ -42,9 +49,12 @@ export class CalculateService {
           this.upperDisplay += value;
           break;
         case 'percent':
-          if (!this.calcFinished
-            && this.percentActiv) this.calculatePercent();
-          else this.continueWithResult();
+          if (!this.calcFinished && this.percentActiv)
+            this.calculatePercent();
+          else if (this.calcFinished)
+            this.continueWithResult();
+          else if (!this.percentActiv)
+            this.showErrMag('Not allowed');
           break;
         case 'comma':
           if (this.calcFinished) {
@@ -110,7 +120,7 @@ export class CalculateService {
 
     if (this.operator === '/') {
       if (this.firstNum === '0') {
-        alert('Division by zero is undefined!');
+        this.showErrMag('Division by 0 is undefined!');
         this.resetCalculator();
         return '';
       }
@@ -152,6 +162,7 @@ export class CalculateService {
       this.operator = '';
       this.result = 0;
       this.calcFinished = false;
+      this.percentActiv = true;
       this.upperDisplay = this.firstNum;
       this.lowerDisplay = '';
     }
@@ -217,6 +228,16 @@ export class CalculateService {
     this.calcFinished = false;
     this.upperDisplay = '';
     this.lowerDisplay = '';
+  }
+
+  showErrMag(msg: string) {
+    this.errMsg = msg;
+    this.showErrMsg = true
+
+    const timeoutId = setTimeout(() => {
+      this.showErrMsg = false;
+      clearTimeout(timeoutId);
+    }, 2000)
   }
 
 }
