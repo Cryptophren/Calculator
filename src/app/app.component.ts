@@ -39,6 +39,6 @@ export class AppComponent implements OnInit {
     const inputType: string = event.target.dataset.type;
     const value: string = event.target.innerHTML;
 
-    this.calculateService.calculte(value, inputType);
+    this.calculateService.calculate(value, inputType);
   }
 }

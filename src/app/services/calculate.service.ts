@@ -9,17 +9,13 @@ export class CalculateService {
   operator: string = '';
   result: number = 0;
   percentActiv: boolean = true;
-  endCurrentCal: boolean = false;
+  calcFinished: boolean = false;
   upperDisplay: string = '';
   lowerDisplay: string = '';
 
-  // a counter just for the console for debugging
-  i = 1;
-
-
-  calculte(value: string, inputType: string) {
+  calculate(value: string, inputType: string) {
     if (inputType === 'num' && this.firstNum.length < 15) {
-      if (this.endCurrentCal) this.resetCalculator();
+      if (this.calcFinished) this.resetCalculator();
 
       if (this.firstNum === '0' && value === "0") return;
 
@@ -46,12 +42,12 @@ export class CalculateService {
           this.upperDisplay += value;
           break;
         case 'percent':
-          if (!this.endCurrentCal
-            && this.percentActiv) this.calPercent();
+          if (!this.calcFinished
+            && this.percentActiv) this.calculatePercent();
           else this.continueWithResult();
           break;
         case 'comma':
-          if (this.endCurrentCal) {
+          if (this.calcFinished) {
             this.resetCalculator();
             this.firstNum = '0.';
             this.upperDisplay = '0,';
@@ -69,28 +65,20 @@ export class CalculateService {
           this.toggleMinus(this.upperDisplay);
           break;
         case 'equal':
-          if (!this.endCurrentCal && this.secondNum !== '') {
+          if (!this.calcFinished && this.secondNum !== '') {
             this.calculateResult();
             this.lowerDisplay = this.result.toString();
           }
           break;
         case 'delete':
           this.continueWithResult();
-          this.firstNum =
-            this.firstNum.slice(0, this.firstNum.length - 1);
+          this.deleteInput();
           break;
         case 'clear':
           this.resetCalculator();
           break;
       }
     }
-    console.log(this.i++);
-    console.log('firstNum :' + this.firstNum);
-    console.log('operator :' + this.operator);
-    console.log('secondeNum :' + this.secondNum);
-    console.log('result :' + this.result);
-    console.log('endCurrentCal :' + this.endCurrentCal);
-    console.log('-------------------------');
   }
 
   onOperatorClicked(value: string) {
@@ -98,7 +86,7 @@ export class CalculateService {
 
     if (this.secondNum !== '') {
 
-      if (this.endCurrentCal) {
+      if (this.calcFinished) {
         this.upperDisplay = this.result.toString();
         this.lowerDisplay = '';
       }
@@ -108,7 +96,7 @@ export class CalculateService {
 
       this.firstNum = '';
       this.operator = value;
-      this.endCurrentCal = false;
+      this.calcFinished = false;
       return
     }
 
@@ -137,11 +125,11 @@ export class CalculateService {
     } else result = +this.firstNum + +this.secondNum;
 
     this.result = result;
-    this.endCurrentCal = true;
+    this.calcFinished = true;
     return result;
   }
 
-  calPercent() {
+  calculatePercent() {
     this.upperDisplay += '%';
 
     if (this.operator === '+' || this.operator === '-') {
@@ -154,7 +142,7 @@ export class CalculateService {
   }
 
   continueWithResult() {
-    if (this.endCurrentCal) {
+    if (this.calcFinished) {
 
       if (this.upperDisplay.includes('%'))
         this.firstNum = (this.result / 100).toString();
@@ -163,13 +151,13 @@ export class CalculateService {
       this.secondNum = '';
       this.operator = '';
       this.result = 0;
-      this.endCurrentCal = false;
+      this.calcFinished = false;
       this.upperDisplay = this.firstNum;
       this.lowerDisplay = '';
     }
   }
 
-  toggleMinus(strg: String) {
+  toggleMinus(strg: string) {
     if (!this.operator) {
       this.upperDisplay = this.firstNum;
       return
@@ -199,13 +187,34 @@ export class CalculateService {
     }
   }
 
+  deleteInput() {
+    if (this.firstNum.length > 0) {
+      this.firstNum =
+        this.firstNum.slice(0, this.firstNum.length - 1);
+      this.upperDisplay =
+        this.upperDisplay.slice(0, this.upperDisplay.length - 1);
+
+      if (this.firstNum === '-') {
+        this.firstNum =
+          this.firstNum.slice(0, this.firstNum.length - 1);
+        this.upperDisplay =
+          this.upperDisplay.slice(0, this.upperDisplay.length - 1);
+      }
+    } else if (this.operator) {
+      this.operator = '';
+      this.firstNum = this.secondNum;
+      this.secondNum = '';
+      this.upperDisplay = this.firstNum;
+    }
+  }
+
   resetCalculator() {
     this.firstNum = '';
     this.secondNum = '';
     this.operator = '';
     this.result = 0;
     this.percentActiv = true;
-    this.endCurrentCal = false;
+    this.calcFinished = false;
     this.upperDisplay = '';
     this.lowerDisplay = '';
   }
