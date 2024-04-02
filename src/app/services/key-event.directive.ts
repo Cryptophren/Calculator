@@ -43,7 +43,7 @@ export class KeyEventDirective implements OnInit {
           inputType = 'oper';
           break;
         case '.':
-          inputType = 'comma';
+          inputType = 'decimal';
           break;
         default:
           inputType = 'num';
@@ -58,10 +58,12 @@ export class KeyEventDirective implements OnInit {
 
     switch (event.key) {
       case 'Enter':
+        event.preventDefault();
         value = '=';
         inputType = 'equal';
         break;
       case 'Backspace':
+        event.preventDefault();
         inputType = 'delete';
         break;
       case 'Delete':
@@ -70,8 +72,8 @@ export class KeyEventDirective implements OnInit {
         inputType = 'clear';
         break;
       case 'Tab':
-        inputType = 'convert';
         event.preventDefault();
+        inputType = 'convert';
         break;
       default:
         return

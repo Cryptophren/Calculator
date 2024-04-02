@@ -42,7 +42,7 @@ export class CalculateService {
       if (this.firstNum === ''
         && inputType !== 'clear'
         && inputType !== 'delete'
-        && inputType !== 'comma'
+        && inputType !== 'decimal'
       ) return;
 
       switch (inputType) {
@@ -58,7 +58,7 @@ export class CalculateService {
           else if (!this.percentActiv)
             this.showErrMag('Not allowed');
           break;
-        case 'comma':
+        case 'decimal':
           if (this.calcFinished) {
             this.resetCalculator();
             this.firstNum = '0.';
@@ -91,6 +91,8 @@ export class CalculateService {
           break;
       }
     }
+    this.upperDisplay = this.upperDisplay.replace('.', ',');
+    this.lowerDisplay = this.lowerDisplay.replace('.', ',');
   }
 
   onOperatorClicked(value: string) {
