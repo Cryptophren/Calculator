@@ -3,12 +3,13 @@ import { ModeService } from './services/mode.service';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CalculateService } from './services/calculate.service';
+import { KeyEventDirective } from './services/key-event.directive';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, MatTooltipModule],
+  imports: [CommonModule, MatTooltipModule, KeyEventDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -35,10 +36,9 @@ export class AppComponent implements OnInit {
     localStorage.setItem('currentMode', JSON.stringify(mode));
   }
 
-  getInput(event: any) {
+  getInput = (event: any) => {
     const inputType: string = event.target.dataset.type;
     const value: string = event.target.innerHTML;
-
     this.calculateService.calculate(value, inputType);
   }
 }

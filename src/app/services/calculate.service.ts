@@ -4,17 +4,18 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CalculateService {
-  firstNum: string = '';
-  secondNum: string = '';
-  operator: string = '';
-  result: number = 0;
-  percentActiv: boolean = true;
-  calcFinished: boolean = false;
+  private firstNum: string = '';
+  private secondNum: string = '';
+  private operator: string = '';
+  private result: number = 0;
+  private percentActiv: boolean = true;
+  private calcFinished: boolean = false;
+  private timeoutId: any;
+
   upperDisplay: string = '';
   lowerDisplay: string = '';
-  showErrMsg: boolean = false;
   errMsg: string = '';
-  timeoutId: any;
+  showErrMsg: boolean = false;
 
   calculate(value: string, inputType: string) {
     if (this.upperDisplay.length > 30) {
@@ -120,7 +121,7 @@ export class CalculateService {
     let result: number;
 
     if (this.operator === '/') {
-      if (this.firstNum === '0') {
+      if (+this.firstNum === 0) {
         this.showErrMag('Division by 0 is undefined!');
         this.resetCalculator();
         return '';
