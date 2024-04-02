@@ -176,26 +176,27 @@ export class CalculateService {
       return
     }
 
-    const plus = strg.lastIndexOf('+');
-    const min = strg.lastIndexOf('-');
-    const mult = strg.lastIndexOf('*');
+    const pls = strg.lastIndexOf('+');
+    const mns = strg.lastIndexOf('-');
+    const mlt = strg.lastIndexOf('*');
     const div = strg.lastIndexOf('/');
-    const lastOperIndx = Math.max(plus, min, mult, div);
+    const lastOperIndx = Math.max(pls, mns, mlt, div);
     const lastOper = strg.charAt(lastOperIndx);
     const firstPart = strg.slice(0, lastOperIndx);
     const secondPart = strg.slice(lastOperIndx + 1);
+    let newStrg = '';
 
     if (lastOper === "-") {
-      const newStrg = firstPart.concat('+', secondPart);
+      newStrg = firstPart.concat('+', secondPart);
       this.upperDisplay = newStrg;
 
     } else if (lastOper === "+") {
-      const newStrg = firstPart.concat('-', secondPart);
+      newStrg = firstPart.concat('-', secondPart);
       this.upperDisplay = newStrg;
 
     } else {
       const firstPart = strg.slice(0, lastOperIndx + 1);
-      const newStrg = firstPart.concat('-', secondPart);
+      newStrg = firstPart.concat('-', secondPart);
       this.upperDisplay = newStrg;
     }
   }
