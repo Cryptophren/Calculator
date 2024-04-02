@@ -13,7 +13,7 @@
           {{calculateService.upperDisplay}}
         </div>
         <div>
-          {{calculateService.lowerDisplay}}
+          {{calculateService.lowerDisplay | number: '1.0-8'}}
         </div>
       </div>
 
@@ -47,7 +47,7 @@
         <div class="buttons-row">
           <button class="sym-btn" data-type="convert" (click)="getInput($event)">+/-</button>
           <button class="num-btn" data-type="num" (click)="getInput( $event)">0</button>
-          <button class="sym-btn" data-type="decimal" (click)="getInput($event)">,</button>
+          <button class="sym-btn" data-type="decimal" (click)="getInput($event)">.</button>
           <button class="sym-btn" data-type="equal" (click)="getInput($event)">=</button>
         </div>
       </div>

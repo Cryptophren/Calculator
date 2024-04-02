@@ -19,7 +19,7 @@ export class CalculateService {
 
   calculate(value: string, inputType: string) {
     if (this.upperDisplay.length > 30) {
-      this.showErrMag('30 Characters max!');
+      this.showErrMag('Max 30 Characters allowed!');
       this.resetCalculator();
     }
 
@@ -32,6 +32,9 @@ export class CalculateService {
         this.firstNum = value;
         this.upperDisplay = value;
         return
+      } else if (!this.percentActiv) {
+        this.showErrMag('Not allowed');
+        return;
       }
 
       this.firstNum += value;
@@ -62,13 +65,13 @@ export class CalculateService {
           if (this.calcFinished) {
             this.resetCalculator();
             this.firstNum = '0.';
-            this.upperDisplay = '0,';
+            this.upperDisplay = '0.';
           } else if (this.firstNum === '') {
             this.firstNum = '0.';
-            this.upperDisplay += '0,';
+            this.upperDisplay += '0.';
           } else if (!this.firstNum.includes('.')) {
-            this.firstNum += '.';
-            this.upperDisplay += ',';
+            this.firstNum += value;
+            this.upperDisplay += value;
           }
           break;
         case 'convert':
@@ -91,8 +94,6 @@ export class CalculateService {
           break;
       }
     }
-    this.upperDisplay = this.upperDisplay.replace('.', ',');
-    this.lowerDisplay = this.lowerDisplay.replace('.', ',');
   }
 
   onOperatorClicked(value: string) {
@@ -140,6 +141,10 @@ export class CalculateService {
 
     this.result = result;
     this.calcFinished = true;
+
+    if (this.countDecimals(result) > 8)
+      this.showErrMag('Displaying max 8 decimals');
+
     return result;
   }
 
@@ -170,6 +175,12 @@ export class CalculateService {
       this.upperDisplay = this.firstNum;
       this.lowerDisplay = '';
     }
+  }
+
+  countDecimals(result: number) {
+    const numberString = result.toString();
+    const parts = numberString.split('.');
+    return parts.length === 1 ? 0 : parts[1].length;
   }
 
   toggleMinus(strg: string) {
@@ -204,6 +215,11 @@ export class CalculateService {
   }
 
   deleteInput() {
+    if (!this.percentActiv) {
+      this.showErrMag('Not allowed');
+      return;
+    }
+
     if (this.firstNum.length > 0) {
       this.firstNum =
         this.firstNum.slice(0, this.firstNum.length - 1);
